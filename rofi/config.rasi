@@ -1,0 +1,25 @@
+
+configuration { 
+    theme: "/home/xinniw/.config/rofi/theme.rasi";
+    modi: "combi,window,drun,filebrowser,ssh";
+    combi-modi: "window,drun,filebrowser";
+    font: "mono 24";
+    show-icons: true;
+    icon-theme: "Papirus-Dark-Maia";
+    /*combi-format: "{name} [<span weight='light' size='large'><i>({generic})</i></span>]";*/
+    terminal: "terminator";
+    combi-hide-mode-prefix: false;
+    /*
+    width: 5000;
+    columns: 2;
+    eh: 1;
+    matching: "fuzzy";
+    */
+    /*window-format: "{w}    {i}{c}   {t}";*/
+}
+
+/*
+
+*/
+
+

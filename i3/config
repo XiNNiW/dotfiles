@@ -35,7 +35,9 @@ bindsym $mod+Shift+q kill
 # start program launcher
 bindsym $mod+d exec --no-startup-id dmenu_recency
 
-bindsym $mod+Tab exec "rofi -show combi"
+# bindsym $mod+space exec "rofi -combi-modi window#drun#filebrowser -show combi  -show-icons -font 'mono 24'"
+# bindsym $mod+space exec "rofi -combi-modi window#drun#filebrowser -theme '/home/xinniw/.config/rofi/gruvbox-dark-soft.rasi' -font 'mono 24' -show combi -icon-theme 'Papirus-Dark-Maia' -show-icons"
+bindsym $mod+space exec "rofi -show"
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -56,10 +58,10 @@ bindsym $mod+Ctrl+m exec terminator -e 'alsamixer'
 # bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
-# Start Applications
+# Start ApplicationsF
 bindsym $mod+Ctrl+b exec terminator -e 'bmenu'
-bindsym $mod+F2 exec palemoon
-bindsym $mod+F3 exec pcmanfm
+bindsym $mod+F2 exec firefox
+bindsym $mod+F exec pcmanfm
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 bindsym $mod+F5 exec terminator -e 'mocp'
@@ -109,7 +111,7 @@ bindsym $mod+v split v;exec notify-send 'tile vertically'
 bindsym $mod+q split toggle
 
 # toggle fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+F11 fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -120,7 +122,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+Tab focus mode_toggle
 
 # toggle sticky
 bindsym $mod+Shift+s sticky toggle
@@ -151,6 +153,14 @@ set $ws5 5
 set $ws6 6
 set $ws7 7
 set $ws8 8
+# set $ws1 1:
+# set $ws2 2:
+# set $ws3 3:
+# set $ws4 4:
+# set $ws5 5:
+# set $ws6 6:
+# set $ws7 7:
+# set $ws8 8:
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -281,12 +291,12 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
-# exec --no-startup-id blueman-applet
+exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 # exec --no-startup-id start_conky_maia
 exec --no-startup-id ~/.local/bin/start_conky
 # exec --no-startup-id start_conky_green
-exec --no-startup-id alttab -fg "#d58681" -bg "#4a4a4a" -frame "#eb564d" -t 128x150 -i 127x64
+# exec --no-startup-id alttab -fg "#d58681" -bg "#4a4a4a" -frame "#eb564d" -t 128x150 -i 127x64
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
@@ -324,9 +334,12 @@ set_from_resource $term_color15    color15
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
+	# i3bar_command pkill lemonbar; .bar/panel-pywal
 	i3bar_command i3bar
 	status_command i3status
-	position bottom
+        #status_command "exec /home/xinniw/.local/bin/start_i3status.sh"
+	separator_symbol "      /     "
+        tray_padding 0
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 #	tray_output primary
@@ -337,23 +350,25 @@ bar {
 	font xft:URWGothic-Book 13
 	strip_workspace_numbers yes
 
-    colors {
-        background #222D31
-        statusline #BBAE93
-        #statusline #F9FAF9
-        separator  #454947
+        colors {
+                # background #222D31
+                background #282828
+                statusline #BBAE93
+                #statusline #F9FAF9
+                separator  #454947
 
-#                      border  backgr. text
-        # focused_workspace  #26a085 #16a085 #292F34
-        #focused_workspace  #16a085 #16a085 #FDF6E3
-	focused_workspace  #A96B7C #A96B7C #BBAE93
-	active_workspace   #595B5B #353836 #BBAE93
-	#active_workspace   #595B5B #353836 #FDF6E3
-	inactive_workspace #595B5B #222D31 #BBAE93
-	#inactive_workspace #595B5B #222D31 #EEE8D5
-        binding_mode       #16a085 #2C2C2C #F9FAF9
-        urgent_workspace   #16a085 #FDF6E3 #E5201D
-    }
+                #                      border  backgr. text
+                # focused_workspace  #26a085 #16a085 #292F34
+                #focused_workspace  #16a085 #16a085 #FDF6E3
+                focused_workspace  #A96B7C #A96B7C #EBDBB2
+                active_workspace   #595B5B #353836 #EBDBB2
+                #active_workspace   #595B5B #353836 #FDF6E3
+                inactive_workspace #595B5B #222D31 #BBAE93
+                #inactive_workspace #595B5B #222D31 #EEE8D5
+                binding_mode       #16a085 #2C2C2C #F9FAF9
+                urgent_workspace   #16a085 #FDF6E3 #E5201D
+        }
+
 }
 
 # hide/unhide i3status bar
@@ -366,8 +381,8 @@ bindsym $mod+m bar mode toggle
 #  client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
 #  client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
 #  client.placeholder      #000000 #0c0c0c #ffffff #000000 
-  client.focused          #556064 #556064 #BBAE93 #FDF6E3
-  client.focused_inactive #2F3D44 #2F3D44 #BBAE93 #454948
+  client.focused          #556064 #556064 #EBDBB2 #FDF6E3
+  client.focused_inactive #2F3D44 #2F3D44 #EBDBB2 #454948
   client.unfocused        #2F3D44 #2F3D44 #BBAE93 #454948
   client.urgent           #CB4B16 #FDF6E3 #BBAE93 #268BD2
   client.placeholder      #000000 #0c0c0c #ffffff #000000 

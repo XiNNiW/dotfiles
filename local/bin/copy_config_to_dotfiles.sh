@@ -9,6 +9,9 @@
 # sudo pacman -S jack2-dbus
 # sudo pacman -S cadence
 # sudo pacman -S yay
+# sudo pacman -S python-pywal
+# sudo pacman -S mpc
+# sudo pacman -S xdo
 # yay -S bitwig-studio
 # yay -S alttab-git
 # yay -S gruvbox-material-gtk-theme-git
@@ -16,46 +19,55 @@
 # yay -S haskell-tidal
 # sudo pacman -S supercollider
 copyToDotfiles(){
-    local DOTFILES_PATH="/home/xinniw/Development/dotfiles"
-    if [ ! -d DOTFILES_PATH ]; then
-        mkdir -p DOTFILES_PATH
+    local DOTFILES_PATH="${HOME}/Development/dotfiles"
+    if [ ! -d $DOTFILES_PATH ]; then
+        mkdir -p $DOTFILES_PATH
     fi
 
-    if [ ! -d "$DOTFILES_PATH"/i3 ]; then
-        mkdir -p "$DOTFILES_PATH"/i3
+    if [ ! -d "${DOTFILES_PATH}"/i3 ]; then
+        mkdir -p "${DOTFILES_PATH}"/i3
     fi
-    cp ~/.i3/config "$DOTFILES_PATH"/i3/config
+    cp ~/.i3/config "${DOTFILES_PATH}"/i3/config
 
 
-    if [ ! -d "$DOTFILES_PATH"/i3status ]; then
-        mkdir -p "$DOTFILES_PATH"/i3status
+    if [ ! -d "${DOTFILES_PATH}"/i3status ]; then
+        mkdir -p "${DOTFILES_PATH}"/i3status
     fi
-    cp ~/.i3status.conf "$DOTFILES_PATH"/i3status/config
+    cp ~/.i3status.conf "${DOTFILES_PATH}"/i3status/config
 
-    if [ ! -d "$DOTFILES_PATH"/dmenu ]; then
-        mkdir -p "$DOTFILES_PATH"/dmenu
+    if [ ! -d "${DOTFILES_PATH}"/dmenu ]; then
+        mkdir -p "${DOTFILES_PATH}"/dmenu
     fi
-    cp ~/.dmenurc "$DOTFILES_PATH"/dmenu/dmenurc
+    cp ~/.dmenurc "${DOTFILES_PATH}"/dmenu/dmenurc
 
-    if [ ! -d "$DOTFILES_PATH"/conky ]; then
-        mkdir -p "$DOTFILES_PATH"/conky
+    if [ ! -d "${DOTFILES_PATH}"/conky ]; then
+        mkdir -p "${DOTFILES_PATH}"/conky
     fi
-    cp ~/.config/conky/conky.conf "$DOTFILES_PATH"/conky/conky.conf
-    cp ~/.config/conky/conky_shortcuts.conf "$DOTFILES_PATH"/conky/conky_shortcuts.conf
+    cp ~/.config/conky/conky.conf "${DOTFILES_PATH}"/conky/conky.conf
+    cp ~/.config/conky/conky_shortcuts.conf "${DOTFILES_PATH}"/conky/conky_shortcuts.conf
 
 
-    if [ ! -d "$DOTFILES_PATH"/local/ ]; then
-        mkdir -p "$DOTFILES_PATH"/local
+    if [ ! -d "${DOTFILES_PATH}"/rofi/ ]; then
+        mkdir -p "${DOTFILES_PATH}"/rofi
     fi
-    if [ ! -d "$DOTFILES_PATH"/local/bin ]; then
-        mkdir -p "$DOTFILES_PATH"/local/bin
+    cp .config/rofi/config.rasi  "${DOTFILES_PATH}/rofi/config.rasi"
+    cp .config/rofi/theme.rasi  "${DOTFILES_PATH}/rofi/theme.rasi"
+
+
+    if [ ! -d "${DOTFILES_PATH}"/local/ ]; then
+        mkdir -p "${DOTFILES_PATH}"/local
     fi
-    cp ~/.local/bin/copy_config_to_dotfiles.sh "$DOTFILES_PATH"/local/bin/copy_config_to_dotfiles.sh
-    cp ~/.local/bin/start_conky "$DOTFILES_PATH"/local/bin/start_conky
+    if [ ! -d "${DOTFILES_PATH}"/local/bin ]; then
+        mkdir -p "${DOTFILES_PATH}"/local/bin
+    fi
+    cp ~/.local/bin/copy_config_to_dotfiles.sh "${DOTFILES_PATH}"/local/bin/copy_config_to_dotfiles.sh
+    cp ~/.local/bin/start_conky "${DOTFILES_PATH}"/local/bin/start_conky
 
  
+    cp ~/.bashrc "${DOTFILES_PATH}/bashrc"
 
-    echo "files copied to dotfiles repository"
+    echo "files copied to dotfiles repository in ${DOTFILES_PATH}"
+    ls $DOTFILES_PATH
 
     
 
